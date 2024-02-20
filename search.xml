@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Spring Bean 相关记录</title>
+      <link href="/2024/02/20/Spring-Bean-%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/"/>
+      <url>/2024/02/20/Spring-Bean-%E7%9B%B8%E5%85%B3%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="创建Bean的六种方式"><a href="#创建Bean的六种方式" class="headerlink" title="创建Bean的六种方式"></a>创建Bean的六种方式</h2><blockquote><p><a href="https://www.cnblogs.com/lgjlife/p/11060570.html">参考：https://www.cnblogs.com/lgjlife/p/11060570.html</a></p></blockquote><ol><li>Spring XML 配置<ul><li><code>&lt;component-scan /&gt;</code>相关扫描标签</li></ul></li><li>@Component  @Service  @Controller  @Repository<ul><li>使用<code>@Component</code>扫描或者在启动类的根路径或者子路径下</li></ul></li><li>@Bean</li><li>@Import</li><li>ImportSelector、ImportBeanDefinitionRegistrar接口 + @Import创建EnableXXX注解</li><li>创建对象手动注入 通过DefaultListableBeanFactory注入</li></ol><h2 id="Bean-注解全解析"><a href="#Bean-注解全解析" class="headerlink" title="@Bean 注解全解析"></a>@Bean 注解全解析</h2><blockquote><p><a href="https://www.cnblogs.com/cxuanBlog/p/11179439.html">参考：https://www.cnblogs.com/cxuanBlog/p/11179439.html</a></p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL时间戳区间问题</title>
       <link href="/2024/02/20/SQL%E6%97%B6%E9%97%B4%E6%88%B3%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/"/>
       <url>/2024/02/20/SQL%E6%97%B6%E9%97%B4%E6%88%B3%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/</url>
