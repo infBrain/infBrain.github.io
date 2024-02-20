@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>SQL时间戳区间问题</title>
+      <link href="/2024/02/20/SQL%E6%97%B6%E9%97%B4%E6%88%B3%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/"/>
+      <url>/2024/02/20/SQL%E6%97%B6%E9%97%B4%E6%88%B3%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="SQL-时间戳区间问题"><a href="#SQL-时间戳区间问题" class="headerlink" title="SQL 时间戳区间问题"></a>SQL 时间戳区间问题</h1><h2 id="问题举例"><a href="#问题举例" class="headerlink" title="问题举例"></a>问题举例</h2><p>如果Table表中有数据</p><table><thead><tr><th>name</th><th>time</th></tr></thead><tbody><tr><td>张三</td><td>2022-01-01 00:00:00</td></tr><tr><td>李四</td><td>2022-01-01 08:00:00</td></tr></tbody></table><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">Table</span> <span class="keyword">where</span> <span class="type">time</span> <span class="keyword">between</span> <span class="string">&#x27;2022-01-01&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2022-01-01&#x27;</span>；</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">or</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">Table</span> <span class="keyword">where</span> <span class="type">time</span> <span class="operator">&gt;=</span> <span class="string">&#x27;2022-01-01&#x27;</span> <span class="keyword">and</span> <span class="type">time</span> <span class="operator">&lt;=</span> <span class="string">&#x27;2022-01-01&#x27;</span>；</span><br></pre></td></tr></table></figure><p>查询出来的数据会是：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">张三 2022-01-01 00:00:00</span><br></pre></td></tr></table></figure><p>不会有李四数据的原因是，如果时间信息中不添加时分秒的信息，则默认的查询范围是从当天的 00:00:00 到 当天的 00:00:00。</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>可以通过添加时分秒信息进行查询，如</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">Table</span> <span class="keyword">where</span> <span class="type">time</span> <span class="keyword">between</span> <span class="string">&#x27;2022-01-01 00:00:00&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2022-01-01 23:59:59&#x27;</span>；</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">or</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">Table</span> <span class="keyword">where</span> <span class="type">time</span> <span class="operator">&gt;=</span> <span class="string">&#x27;2022-01-01 00:00:00&#x27;</span> <span class="keyword">and</span> <span class="type">time</span> <span class="operator">&lt;=</span> <span class="string">&#x27;2022-01-01 23:59:59&#x27;</span>；</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>test</title>
       <link href="/2023/10/20/test/"/>
       <url>/2023/10/20/test/</url>
