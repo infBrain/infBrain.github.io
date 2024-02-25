@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Springcloud远程调用minio8下载文件的接口</title>
+      <link href="/2024/02/25/Springcloud%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8minio8%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%8E%A5%E5%8F%A3/"/>
+      <url>/2024/02/25/Springcloud%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8minio8%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%8E%A5%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Spring-cloud-远程调用时接收-文件-参数"><a href="#Spring-cloud-远程调用时接收-文件-参数" class="headerlink" title="Spring cloud 远程调用时接收 文件+参数"></a>Spring cloud 远程调用时接收 文件+参数</h2><ol><li>应同时使用注解：**@RequestPart**<br>如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">func</span><span class="params">(<span class="meta">@RequestPart(value = &quot;file&quot;)</span> MutipartFile file, <span class="meta">@RequestPart(value = &quot;fileName&quot;)</span> String fileName)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure></li><li>同时，在下层接口中接文件和参数无需再进行注入，即可接受到参数<br>如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">func2</span><span class="params">(MutipartFile file, String fileName)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure></li></ol><h2 id="远程调用Minio文件下载接口"><a href="#远程调用Minio文件下载接口" class="headerlink" title="远程调用Minio文件下载接口"></a>远程调用Minio文件下载接口</h2><ol><li>可在下层实现中对文件转为 <code>byte[]</code>数组，</li><li>在上层调用中读入<code>byte[]</code>， 并传入 <code>HttpServletResponse</code>类型参数，设置请求头后进行下载<br>在接口方法中如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> AjaxResult <span class="title function_">downLoadFile</span><span class="params">(<span class="meta">@RequestParam(value = &quot;filePath&quot;)</span> filePath, HttpServletResponse response)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure></li><li>在前端中可使用 <code>js-file-download</code>进行下载<ul><li>npm install js-file-download                       （– save）<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">downLoadFile</span>(data).<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">let</span> fileDownLoad = <span class="built_in">require</span>(<span class="string">&quot;js-file-download&quot;</span>) </span><br><span class="line"><span class="title function_">fileDownLoad</span>(response, <span class="string">&quot;文件名称.xxx&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一文详解JDK1.8的Lambda Stream LocalDateTime</title>
       <link href="/2024/02/25/%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3JDK1-8%E7%9A%84Lambda-Stream-LocalDateTime/"/>
       <url>/2024/02/25/%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3JDK1-8%E7%9A%84Lambda-Stream-LocalDateTime/</url>
