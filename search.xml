@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Stream forEach中的remove()空指针异常</title>
+      <link href="/2024/02/25/Stream-forEach%E4%B8%AD%E7%9A%84remove-%E7%A9%BA%E6%8C%87%E9%92%88%E5%BC%82%E5%B8%B8/"/>
+      <url>/2024/02/25/Stream-forEach%E4%B8%AD%E7%9A%84remove-%E7%A9%BA%E6%8C%87%E9%92%88%E5%BC%82%E5%B8%B8/</url>
+      
+        <content type="html"><![CDATA[<p>今天在使用Java Stream 流forEach()时，在其中使用了<code>list.remove()</code>的方法，遇到了一些问题，报错空指针异常，业务代码类似以下的逻辑：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;P&gt; <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;P&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">P</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">P</span>(<span class="string">&quot;张三&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">P</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">P</span>(<span class="string">&quot;李四&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        list.add(p1);</span><br><span class="line">        list.add(p2);</span><br><span class="line">        <span class="comment">// stream forEach</span></span><br><span class="line">        list.stream().forEach(p -&gt; &#123;</span><br><span class="line">            System.out.println(p.getName());</span><br><span class="line">            <span class="keyword">if</span>(p.getName().equals(<span class="string">&quot;张三&quot;</span>))&#123;</span><br><span class="line">                list.remove(p);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>大家可以感觉一下这个会不会把张三去掉，李四留下来。</p><p>答案是：<strong>不会</strong>，会全部清空，并且报错。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出结果应该是：</span></span><br><span class="line">java.lang.NullPointerException...</span><br><span class="line">张三</span><br></pre></td></tr></table></figure><p>看了一下菜鸟教程中对 <a href="https://www.runoob.com/java/java8-streams.html">Stream流</a> 的介绍，Stream会将列表的数据全部以流的形式进行操作，流在管道中传输，并且在管道中的节点中进行相应的处理。而此时若像上述代码一样执行<code>list.remove(d)</code>，移除的将不是列表中的某一个数据，而是一个整体的流数据。下一次的传入forEach中的值，就是null了，会出现空指针异常。</p><blockquote><p>参考资料：</p><ul><li><a href="https://www.runoob.com/java/java8-streams.html">菜鸟教程：Stream流</a></li></ul></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>达梦数据库DCA培训总结</title>
       <link href="/2024/02/25/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93DCA%E5%9F%B9%E8%AE%AD%E6%80%BB%E7%BB%93/"/>
       <url>/2024/02/25/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93DCA%E5%9F%B9%E8%AE%AD%E6%80%BB%E7%BB%93/</url>
